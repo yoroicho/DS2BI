@@ -9,9 +9,12 @@ package entity;
  *
  * @author kyokuto
  */
-public class itemDAO {
+public class ItemDAO {
 
-    public void setitem(ItemEntity itemEntity, String[] line) {
+    public static ItemEntity createitem(String[] line) {
+                
+        ItemEntity itemEntity = new ItemEntity();
+        
         itemEntity.setManagementNumberId(line[0]);
         itemEntity.setControlNumber(line[1]);
         itemEntity.setReferenceNumber(line[2]);
@@ -87,5 +90,7 @@ public class itemDAO {
         itemEntity.setConsumptionTax1(line[72]);
         itemEntity.setAmount2(line[73]);
         itemEntity.setConsumptionTax2(line[74]);
+        
+        return itemEntity;
     }
 }
