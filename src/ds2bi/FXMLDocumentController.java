@@ -5,7 +5,9 @@
  */
 package ds2bi;
 
+import entity.TestRead;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -55,14 +57,16 @@ public class FXMLDocumentController implements Initializable {
     private Button fileChoice;
 
     @FXML
-    void handlefileChoiceButtonAction(ActionEvent event) {
+    void handlefileChoiceButtonAction(ActionEvent event) throws IOException {
         System.out.println("File Choice");
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("FileChooser");
         fileChooser.getExtensionFilters().addAll(
         new FileChooser.ExtensionFilter("csv file", "*.csv","*.CSV"));
         File file = fileChooser.showOpenDialog(null);
-        System.out.println(String.valueOf(file));    }
+        System.out.println(String.valueOf(file));   
+    TestRead.test(file);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
