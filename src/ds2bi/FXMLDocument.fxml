@@ -2,29 +2,18 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.input.KeyCodeCombination?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorPaneBase" prefHeight="200" prefWidth="320" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ds2bi.FXMLDocumentController">
+<AnchorPane id="AnchorPane" fx:id="anchorPaneBase" prefHeight="109.0" prefWidth="586.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ds2bi.FXMLDocumentController">
     <children>
-        <Button fx:id="button" layoutX="126" layoutY="90" onAction="#handleButtonAction" text="_Click Me!" />
-        <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
-      <Button fx:id="fileChoice" layoutX="268.0" layoutY="158.0" mnemonicParsing="false" onAction="#handlefileChoiceButtonAction" text="..." />
-      <MenuButton fx:id="menuButtonBank" layoutX="14.0" layoutY="158.0" mnemonicParsing="false" text="Menu_Button">
-        <items>
-          <MenuItem fx:id="mu" mnemonicParsing="false" text="Action 1">
-               <accelerator>
-                  <KeyCodeCombination alt="UP" code="DIGIT1" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-               </accelerator>
-            </MenuItem>
-          <MenuItem fx:id="ms" mnemonicParsing="false" text="Action 2">
-               <accelerator>
-                  <KeyCodeCombination alt="UP" code="DIGIT2" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-               </accelerator>
-            </MenuItem>
-        </items>
-      </MenuButton>
+        <Button fx:id="button" layoutX="489.0" layoutY="23.0" onAction="#handleButtonAction" text="_Click Me!" />
+        <Label fx:id="label" layoutX="412.0" layoutY="28.0" minHeight="16" minWidth="69" />
+      <Button fx:id="fileChoice" layoutX="534.0" layoutY="64.0" mnemonicParsing="false" onAction="#handlefileChoiceButtonAction" text="..." />
+      <Button fx:id="btnIb_A" layoutX="14.0" layoutY="67.0" onAction="#workIb_A" text="_T(062)" />
+      <Button fx:id="btnIb_B" layoutX="88.0" layoutY="67.0" text="_O(081)" />
+      <Button fx:id="btnIb_C" layoutX="163.0" layoutY="67.0" text="_S(078)" />
+      <Button fx:id="btnIb_D" layoutX="236.0" layoutY="67.0" text="_C(現金)" />
+      <TextField fx:id="txtfldSlipNumber" layoutX="14.0" layoutY="14.0" prefHeight="28.0" prefWidth="296.0" />
     </children>
 </AnchorPane>

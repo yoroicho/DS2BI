@@ -5,16 +5,57 @@
  */
 package entity;
 
+import com.opencsv.CSVReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Stream;
+
 /**
  *
  * @author kyokuto
  */
 public class ItemDAO {
 
+    static List<ItemEntity> list = new ArrayList<>();
+
+    public static void registerList(File file) {
+        try {
+            FileReader fileReader = null;
+            CSVReader csvReader = null;
+            fileReader = new FileReader((file.getPath()));
+            System.out.println(file.getPath());
+            csvReader = new CSVReader(fileReader);
+            csvReader.skip(3);
+
+            list.clear(); // If same file read same item exsist error.
+            csvReader.forEach(s -> list.add(ItemDAO.createitem(s)));
+            System.out.println("All items " + list.size());
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ItemDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ItemDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static Iterator <ItemEntity> selectItemEntity(String slipNumber) {
+        Stream<ItemEntity> s = 
+                list.stream().filter(o -> o.getSlipNumber().trim().equals(slipNumber));
+        Iterator <ItemEntity>iterator = s.iterator();
+        return iterator;
+    }
+
     public static ItemEntity createitem(String[] line) {
-                
+
         ItemEntity itemEntity = new ItemEntity();
-        
+
         itemEntity.setManagementNumberId(line[0]);
         itemEntity.setControlNumber(line[1]);
         itemEntity.setReferenceNumber(line[2]);
@@ -90,7 +131,7 @@ public class ItemDAO {
         itemEntity.setConsumptionTax1(line[72]);
         itemEntity.setAmount2(line[73]);
         itemEntity.setConsumptionTax2(line[74]);
-        
+
         return itemEntity;
     }
 }
