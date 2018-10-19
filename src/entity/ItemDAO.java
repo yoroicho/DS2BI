@@ -11,6 +11,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import static java.util.Comparator.comparing;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
@@ -45,10 +47,12 @@ public class ItemDAO {
         }
     }
 
-    public static Iterator <ItemEntity> selectItemEntity(String slipNumber) {
-        Stream<ItemEntity> s = 
-                list.stream().filter(o -> o.getSlipNumber().trim().equals(slipNumber));
-        Iterator <ItemEntity>iterator = s.iterator();
+    public static Iterator<ItemEntity> selectItemEntity(String slipNumber) {
+        list.sort(comparing(ItemEntity::getItemSeq)
+                .thenComparing(ItemEntity::getBorrowingClassification));
+        Stream<ItemEntity> s
+                = list.stream().filter(o -> o.getSlipNumber().trim().equals(slipNumber));
+        Iterator<ItemEntity> iterator = s.iterator();
         return iterator;
     }
 
