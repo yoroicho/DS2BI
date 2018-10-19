@@ -5,15 +5,19 @@
  */
 package ds2bi;
 
+import clipBoard.ClipBoardUtility;
 import entity.ItemDAO;
 import entity.ItemEntity;
 import entity.TestRead;
+import java.awt.AWTException;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,6 +34,7 @@ import javafx.scene.input.Mnemonic;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import robot.Keyboard;
 
 /**
  *
@@ -45,7 +50,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private TextField txtfldSlipNumber;
-    
+
     @FXML
     private Button btnIb_A;
 
@@ -77,21 +82,47 @@ public class FXMLDocumentController implements Initializable {
         File file = fileChooser.showOpenDialog(null);
         System.out.println(String.valueOf(file));
         ItemDAO.registerList(file);
-            }
-   
+    }
+
     @FXML
-           void workIb_A(){
-               System.out.println("A");
-                testWork("062");
-            }
-   
+    void workIb_A() {
+        System.out.println("A");
+        testWork("062");
+    }
+
     @FXML
-    private void testWork(String iB){
-        Iterator<ItemEntity>iterator = ItemDAO.selectItemEntity(txtfldSlipNumber.getText());
-        while(iterator.hasNext()){
-           ItemEntity itemEntity = iterator.next();
-           System.out.println(itemEntity.getItemSeq()+"-"+itemEntity.getBorrowingClassification());
-       }
+    private void testWork(String iB) {
+
+        try {
+            robot.Mouse.mouseActiveHome();
+
+            Iterator<ItemEntity> iterator = ItemDAO.selectItemEntity(txtfldSlipNumber.getText());
+            while (iterator.hasNext()) {
+                ItemEntity itemEntity = iterator.next();
+
+                System.out.println(itemEntity.getItemSeq() + "-" + itemEntity.getBorrowingClassification());
+                System.out.println(itemEntity.getCustomerName());
+
+                ClipBoardUtility.contentPutString(itemEntity.getCustomerName());
+                System.out.println(itemEntity.getCustomerName());
+                Keyboard.pasteKeyPattarn();
+
+                ClipBoardUtility.contentPutString(itemEntity.getSummary());
+                System.out.println(itemEntity.getSummary());
+                Keyboard.pasteKeyPattarn();
+
+                Keyboard keyboard = new Keyboard();
+                
+                keyboard.doTyping(itemEntity.getAmountOfMoney());
+                System.out.println(itemEntity.getAmountOfMoney());
+                // keyboard.doTyping(itemEntity.getSummary());
+
+            }
+        } catch (AWTException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 

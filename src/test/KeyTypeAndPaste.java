@@ -34,7 +34,7 @@ public class KeyTypeAndPaste {
 
             Keyboard keyboard = new Keyboard();
             try {
-                keyboard.doTyping("jsoigujq98gj5ijgbpfmopjiuchxrpfnrjkicgxj9g"
+                keyboard.doTyping("jsoiguあいうjq98gj5ijgbpfmopjiuchxrpfnrjkicgxj9g"
                         + "rpeomc,x894t-8gmc'(&%&)#`(0JGNV =");
 
                 /* USE TO java8FX ClipBoard

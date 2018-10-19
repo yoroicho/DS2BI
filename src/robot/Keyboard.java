@@ -10,10 +10,13 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import static java.awt.event.KeyEvent.*;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -358,28 +361,23 @@ public class Keyboard {
             return;
         }
         if (keyCodes[offset] == VK_UNDERSCORE) { // '_'
-           robot.delay(1000);
+            robot.delay(1000);
             /**
-            Toolkit kit = Toolkit.getDefaultToolkit();
-            Clipboard clip = kit.getSystemClipboard();
-            try {
-                String buf = (String) clip.getData(DataFlavor.stringFlavor);
-                StringSelection ss = new StringSelection("_");
-                clip.setContents(ss, ss);
-                robot.keyPress(VK_CONTROL);
-                robot.keyPress(VK_V);
-                robot.keyRelease(VK_V);
-                robot.keyRelease(VK_CONTROL);
-                            robot.delay(1000);
-                StringSelection ssBuf = new StringSelection(buf);
-                Toolkit kitBuf = Toolkit.getDefaultToolkit();
-                Clipboard clipBuf = kitBuf.getSystemClipboard();
-                clipBuf.setContents(ssBuf, ssBuf);
-            } catch (UnsupportedFlavorException | IOException e) {
-                System.out.println(e);
-            }
-            */
-            JOptionPane.showMessageDialog(null, "Press the [U.S.] key => press the Ok button => click object"); // Key with hand.
+             * Toolkit kit = Toolkit.getDefaultToolkit(); Clipboard clip =
+             * kit.getSystemClipboard(); try { String buf = (String)
+             * clip.getData(DataFlavor.stringFlavor); StringSelection ss = new
+             * StringSelection("_"); clip.setContents(ss, ss);
+             * robot.keyPress(VK_CONTROL); robot.keyPress(VK_V);
+             * robot.keyRelease(VK_V); robot.keyRelease(VK_CONTROL);
+             * robot.delay(1000); StringSelection ssBuf = new
+             * StringSelection(buf); Toolkit kitBuf =
+             * Toolkit.getDefaultToolkit(); Clipboard clipBuf =
+             * kitBuf.getSystemClipboard(); clipBuf.setContents(ssBuf, ssBuf); }
+             * catch (UnsupportedFlavorException | IOException e) {
+             * System.out.println(e); }
+             */
+            JOptionPane.showMessageDialog(null,
+                    "Press the [_] key => press the Ok button => click window"); // Key with hand.
             robot.delay(3000);
         } else {
             robot.keyPress(keyCodes[offset]);
@@ -388,4 +386,15 @@ public class Keyboard {
         }
     }
 
+    public static void pasteKeyPattarn() {
+        try {
+            Robot robot = new Robot();
+            robot.keyPress(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_V);
+            robot.keyRelease(KeyEvent.VK_CONTROL);
+            robot.keyRelease(KeyEvent.VK_V);
+        } catch (AWTException ex) {
+            Logger.getLogger(Keyboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
