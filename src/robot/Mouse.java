@@ -6,9 +6,9 @@
 package robot;
 
 import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.InputEvent;
 
+import java.awt.event.InputEvent;
+import com.sun.glass.ui.Robot;
 /**
  *
  * @author kyokuto
@@ -22,12 +22,21 @@ public class Mouse {
     
 
     public static void mouseActiveHome() throws AWTException {
+        
+        Robot robot = com.sun.glass.ui.Application.GetApplication().createRobot();
+    robot.mouseMove(HOME_POS_X, HOME_POS_Y);
+    robot.mousePress(1);
+    robot.mouseRelease(1);
+        
+    /*
+        
         Robot robot = new Robot();
         robot.mouseMove(HOME_POS_X, HOME_POS_Y);
         robot.delay(WAIT_ACTIVE);
-        robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+        robot.mousePress(InputEvent..BUTTON1_DOWN_MASK);
         robot.delay(WAIT_ACTIVE);
         robot.mouseRelease(InputEvent.BUTTON2_DOWN_MASK);
         robot.delay(WAIT_ACTIVE);
+*/
     }
 }
