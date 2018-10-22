@@ -27,7 +27,7 @@ public class ItemDAO {
 
     static List<ItemEntity> list = new ArrayList<>();
 
-    public static void registerList(File file) {
+    public static int registerList(File file) {
         try {
             FileReader fileReader = null;
             CSVReader csvReader = null;
@@ -39,11 +39,15 @@ public class ItemDAO {
             list.clear(); // If same file read same item exsist error.
             csvReader.forEach(s -> list.add(ItemDAO.createitem(s)));
             System.out.println("All items " + list.size());
+            return list.size();
+            
 
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ItemDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
         } catch (IOException ex) {
             Logger.getLogger(ItemDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
         }
     }
 

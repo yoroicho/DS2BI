@@ -35,6 +35,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import robot.Keyboard;
+import robot.Mouse;
 
 /**
  *
@@ -64,13 +65,7 @@ public class FXMLDocumentController implements Initializable {
     private Button btnIb_D;
 
     @FXML
-    private Label label;
-
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
+    private Label lblAllItemCount;
 
     @FXML
     void handlefileChoiceButtonAction(ActionEvent event) throws IOException {
@@ -81,7 +76,9 @@ public class FXMLDocumentController implements Initializable {
                 new FileChooser.ExtensionFilter("csv file", "*.csv", "*.CSV"));
         File file = fileChooser.showOpenDialog(null);
         System.out.println(String.valueOf(file));
-        ItemDAO.registerList(file);
+        this.lblAllItemCount.setText(
+                String.valueOf(
+                        ItemDAO.registerList(file)));
     }
 
     @FXML
@@ -112,7 +109,7 @@ public class FXMLDocumentController implements Initializable {
                 Keyboard.pasteKeyPattarn();
 
                 Keyboard keyboard = new Keyboard();
-                
+
                 keyboard.doTyping(itemEntity.getAmountOfMoney());
                 System.out.println(itemEntity.getAmountOfMoney());
                 // keyboard.doTyping(itemEntity.getSummary());
@@ -123,6 +120,16 @@ public class FXMLDocumentController implements Initializable {
         } catch (Exception ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        //This way is no problem.
+        Stage myStage = (Stage)this.anchorPaneBase.getScene().getWindow();
+        System.out.println(myStage.getX()+","+myStage.getY());
+        //Way end.
+        
+        double posX = txtfldSlipNumber.getScene().getWindow().getX();
+        double posY = txtfldSlipNumber.getScene().getWindow().getY();
+        Mouse.mouseClick((int)posX+10, (int)posY+10);
+        this.txtfldSlipNumber.requestFocus();
 
     }
 
