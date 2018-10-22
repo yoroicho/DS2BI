@@ -23,7 +23,7 @@ public class RemarkToVoyage {
     }
     
     public static String pickVoyageLeft(String remark){
-        return String.valueOf(remark.substring(0, 7)).trim();
+        return remark.substring(0, 7).trim();
     } 
     
     public static String pickVoyageRight(String remark){
