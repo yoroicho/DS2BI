@@ -15,8 +15,6 @@ public class RemarkToVoyage {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String s = "0899   NYK VESTA                                061W        ";
-        String t = "0253   anderson bridge                          1812/1813    ";
         String u = "0123456X___________________ ___________________X012345678901";
         System.out.println(u.length());
         System.out.println("|"+pickVoyageLeft(u)+"|");
